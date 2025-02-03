@@ -42,7 +42,7 @@ export default function Home() {
             <p className="text-lg font-semibold text-slate-400">Loading data...</p>
           </div>
         ) : error ? (
-          <p className="text-red-500 text-center md:text-lg py-10">Error: {error.message}</p>
+          <p className="text-red-500 px-2 md:text-lg py-4 md:py-10 border-2 border-red-500 w-fit mx-auto"><span className="font-bold">Error</span>: Failed to fetch countries. Please check your internet connection or try again later.</p>
         ) : (
           <div className="grid md:grid-cols-4 gap-x-2">
           {data.countries && (

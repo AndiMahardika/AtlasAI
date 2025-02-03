@@ -28,7 +28,7 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="min-h-screen relative">
+    <main className="relative">
       <Navbar/>
       <HeroSection/>
       <AboutUs />

@@ -1,20 +1,12 @@
-import { Button } from "@/components/ui/button"
+import Home from "@/features/homepage/home"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 export default function AppRoutes () {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Test />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </BrowserRouter>
-  )
-}
-
-function Test () {
-  return (
-    <div className="bg-slate-200 min-h-screen flex justify-center items-center">
-      <Button variant={'destructive'}>Test Button</Button>
-    </div>
   )
 }

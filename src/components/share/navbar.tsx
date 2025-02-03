@@ -1,108 +1,75 @@
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
-import { Link } from "react-router-dom"
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent } from '@/components/ui/dropdown-menu';
+import { Sheet, SheetTrigger, SheetContent } from '@/components/ui/sheet';
+import { Link } from 'react-router-dom';
 
-export default function Navbar() {
+const Navbar: React.FC = () => {
   return (
-    <header className="flex h-20 w-full shrink-0 items-center px-4 md:px-6">
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button variant="outline" size="icon" className="lg:hidden">
-            <MenuIcon className="h-6 w-6" />
-            <span className="sr-only">Toggle navigation menu</span>
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="left">
-          <Link to="#" className="mr-6 hidden lg:flex">
-            <MountainIcon className="h-6 w-6" />
-            <span className="sr-only">Acme Inc</span>
+    <header className="sticky top-0 z-50 w-full border-b bg-white">
+      <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-6">
+        <Link to="#" className="flex items-center gap-2">
+          <span className="font-semibold text-blue-500">AtlasAI</span>
+        </Link>
+        <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
+          <Link to="#" className="text-gray-500 hover:text-gray-900">
+            Home
           </Link>
-          <div className="grid gap-2 py-6">
-            <Link to="/" className="flex w-full items-center py-2 text-lg font-semibold">
-              Home
-            </Link>
-            <Link to="/upload" className="flex w-full items-center py-2 text-lg font-semibold">
-              Upload
-            </Link>
-            <Link to="#" className="flex w-full items-center py-2 text-lg font-semibold">
-              Services
-            </Link>
-            <Link to="#" className="flex w-full items-center py-2 text-lg font-semibold">
-              Contact
-            </Link>
-          </div>
-        </SheetContent>
-      </Sheet>
-      <Link to="#" className="mr-6 hidden lg:flex">
-        <MountainIcon className="h-6 w-6" />
-        <span className="sr-only">Acme Inc</span>
-      </Link>
-      <nav className="ml-auto hidden lg:flex gap-6">
-        <Link
-          to="/"
-          className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
-        >
-          Home
-        </Link>
-        <Link
-          to="/upload"
-          className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
-        >
-          Upload
-        </Link>
-        <Link
-          to="#"
-          className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
-        >
-          Services
-        </Link>
-        <Link
-          to="#"
-          className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
-        >
-        </Link>
-      </nav>
+          <Link to="#" className="text-gray-500 hover:text-gray-900">
+            Chat-AI
+          </Link>
+        </nav>
+        <div className="flex items-center gap-4">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="rounded-full">
+                <img src='https://i.pinimg.com/736x/3c/ae/07/3cae079ca0b9e55ec6bfc1b358c9b1e2.jpg' className="h-8 w-8 rounded-full" alt='profile' />
+                <span className="sr-only">Profile</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-[100px] p-2">
+              <div className="relative flex-col flex items-center space-y-2">
+                <Link to="#" className="text-gray-500 hover:text-gray-900">
+                  profile
+                </Link>
+                <Link to="#" className="text-gray-500 hover:text-gray-900">
+                  logout
+                </Link>
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="rounded-full md:hidden">
+                <MenuIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                <span className="sr-only">Toggle navigation menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="md:hidden">
+              <div className="grid gap-4 p-4">
+                <Link to="#" className="text-sm font-medium text-gray-500 hover:text-gray-900">
+                  Home
+                </Link>
+                <Link to="#" className="text-sm font-medium text-gray-500 hover:text-gray-900">
+                  Chat-AI
+                </Link>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
     </header>
-  )
-}
+  );
+};
 
-function MenuIcon(props) {
+function MenuIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <line x1="4" x2="20" y1="12" y2="12" />
       <line x1="4" x2="20" y1="6" y2="6" />
       <line x1="4" x2="20" y1="18" y2="18" />
     </svg>
-  )
+  );
 }
 
-
-function MountainIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
-    </svg>
-  )
-}
+export default Navbar;

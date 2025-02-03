@@ -1,28 +1,32 @@
 import { Table, TableBody,TableCell,TableRow } from "@/components/ui/table"
 import { Button } from "../ui/button"
+import { ICountries } from "@/types/types"
 
-export default function Card() {
+interface ICard {
+  data: ICountries
+}
 
+export default function Card({data}: ICard) {
   return (
-    <div className='border-2 rounded-md mb-2 p-2 flex flex-col justify-between'>
+    <div className='border-2 border-slate-500 rounded-md mb-2 p-2 flex flex-col justify-between'>
       <div className="space-y-2">
-        <p className='text-center text-8xl'>🇫🇷</p>
-        <h4 className="text-center text-lg font-semibold">France</h4>
+        <p className='text-center text-8xl'>{data.emoji}</p>
+        <h4 className="text-center text-lg font-semibold">{data.name}</h4>
       </div>
       <div className="space-y-2">
         <Table>
           <TableBody>
             <TableRow>
               <TableCell className="font-medium">Code</TableCell>
-              <TableCell>AE</TableCell>
+              <TableCell>{data.code}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="font-medium">Capital</TableCell>
-              <TableCell>Washington, D.C</TableCell>
+              <TableCell>{data.capital}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="font-medium">Currency</TableCell>
-              <TableCell>IDR</TableCell>
+              <TableCell>{data.currency}</TableCell>
             </TableRow>
           </TableBody>
         </Table>

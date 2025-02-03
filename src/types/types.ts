@@ -12,11 +12,9 @@ export interface IDetail {
   emoji: string;
   capital: string;
   currency: string;
-  awsRegion?: string;
-  phones?: string[];
   phone?: string;
   subdivisions?: {
-    emoji: string;
+    name: string;
   }[];
   languages: {
     name: string;
@@ -27,13 +25,7 @@ export interface IDetail {
   continent: {
     code: string;
     name: string;
-    countries: {
-      emoji: string;
-      name: string;
-      capital?: string;
-      currencies?: string[];
-      code: string;
-    }[];
+    countries: ICountries[];
   };
   states: {
     code: string;

@@ -1,6 +1,7 @@
 import { Table, TableBody,TableCell,TableRow } from "@/components/ui/table"
 import { Button } from "../ui/button"
 import { ICountries } from "@/types/types"
+import { Link } from "react-router-dom"
 
 interface ICard {
   data: ICountries
@@ -30,7 +31,9 @@ export default function Card({data}: ICard) {
             </TableRow>
           </TableBody>
         </Table>
-        <Button variant={"default"} className="w-full bg-blue-500 hover:bg-blue-600" >Detail</Button>
+        <Link to={`/detail/${data.code}`}>
+          <Button variant={"default"} className="w-full bg-blue-500 hover:bg-blue-600" >Detail</Button>      
+        </Link>
       </div>
     </div>
   )

@@ -1,3 +1,4 @@
+import Chatbot from "@/features/chatbot/chatbot"
 import DetailPage from "@/features/detailpage/detail.page"
 import Home from "@/features/homepage/home"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
@@ -8,6 +9,7 @@ export default function AppRoutes () {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/detail/:code" element={<DetailPage />} />
+        <Route path="/chatbot" element={<Chatbot />} />
       </Routes>
     </BrowserRouter>
   )

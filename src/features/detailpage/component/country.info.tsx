@@ -45,7 +45,7 @@ export default function CountryInfo({ country }: ICountryinfo) {
           </TableRow>
         </TableBody>
       </Table>
-      <Link to="#">
+      <Link to="/chatbot">
         <Button className="w-fit">Ask AI About This Country</Button>
       </Link>
     </div>

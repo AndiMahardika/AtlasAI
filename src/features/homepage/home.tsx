@@ -11,11 +11,13 @@ import useCountry from "./hooks/useCountry";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip"
+import useNavigateToDetail from "@/hooks/useNavigateToDetail";
 
 export default function Home() {
   const { data, loading, error } = useCountry()
   const { countries } = useCountryStore();
   const [showButton, setShowButton] = useState(false)
+  const { getDetail } = useNavigateToDetail()
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -28,21 +30,25 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="min-h-screen relative">
+    <main className="relative">
       <Navbar/>
       <HeroSection/>
       <AboutUs />
 
       <section className="container mx-auto space-y-3 px-2 md:px-0 pt-8 md:pt-0">
         <h3 className="text-3xl md:text-4xl text-center font-bold text-blue-500">Explore Countries</h3>
-        <Select options={countries} className="md:w-1/2 mx-auto" placeholder="Search for a country..."></Select>
+        <Select 
+          options={countries} 
+          className="md:w-1/2 mx-auto" 
+          placeholder="Search for a country..." 
+          onChange={(e) => getDetail(e?.value as string)}></Select>
         { loading ? (
           <div className="flex flex-col items-center justify-center py-10 space-y-3">
             <Loader className="animate-spin" size={42} />
             <p className="text-lg font-semibold text-slate-400">Loading data...</p>
           </div>
         ) : error ? (
-          <p className="text-red-500 text-center md:text-lg py-10">Error: {error.message}</p>
+          <p className="text-red-500 px-2 md:text-lg py-4 md:py-10 border-2 border-red-500 w-fit mx-auto"><span className="font-bold">Error</span>: Failed to fetch countries. Please check your internet connection or try again later.</p>
         ) : (
           <div className="grid md:grid-cols-4 gap-x-2">
           {data.countries && (

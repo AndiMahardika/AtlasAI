@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
           <span className="font-semibold text-blue-500">AtlasAI</span>
         </Link>
         <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
-          <Link to="#" className="text-gray-500 hover:text-gray-900">
+          <Link to="/" className="text-gray-500 hover:text-gray-900">
             Home
           </Link>
           <Link to="#" className="text-gray-500 hover:text-gray-900">
@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
             </SheetTrigger>
             <SheetContent side="left" className="md:hidden">
               <div className="grid gap-4 p-4">
-                <Link to="#" className="text-sm font-medium text-gray-500 hover:text-gray-900">
+                <Link to="/" className="text-sm font-medium text-gray-500 hover:text-gray-900">
                   Home
                 </Link>
                 <Link to="#" className="text-sm font-medium text-gray-500 hover:text-gray-900">

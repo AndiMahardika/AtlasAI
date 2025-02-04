@@ -2,12 +2,15 @@ import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { IDetail } from "@/types/types";
 import { Link } from "react-router-dom";
+import useCountryStore from "@/store/useCountryStore";
 
 interface ICountryinfo {
   country: IDetail;
 }
 
 export default function CountryInfo({ country }: ICountryinfo) {
+  const { setSelectedCountry } = useCountryStore()
+
   return (
     <div className="flex flex-col space-y-6">
       <h1 className="text-4xl md:text-6xl font-bold mt-4 text-blue-500">{country.name}</h1>
@@ -45,7 +48,7 @@ export default function CountryInfo({ country }: ICountryinfo) {
           </TableRow>
         </TableBody>
       </Table>
-      <Link to="/chatbot">
+      <Link to="/chatbot" onClick={() => setSelectedCountry(`${country.emoji} ${country.name}`)}>
         <Button className="w-fit">Ask AI About This Country</Button>
       </Link>
     </div>

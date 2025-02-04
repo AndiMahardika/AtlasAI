@@ -9,7 +9,7 @@ export default function HeroSection() {
         <p className="text-base md:text-lg font-semibold text-blue-500">Search, Discover, and Plan your dream journey today ! 🚀</p>
       </div>
       <div className="flex md:justify-center items-center overflow-hidden">
-        <img src={background} alt="" className="animate-spin" />
+        <img src={background} alt="" className="" />
       </div>
     </section>
   )

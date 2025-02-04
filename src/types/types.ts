@@ -4,6 +4,8 @@ export interface ICountries {
   emoji: string;
   capital: string;
   currency: string;
+  label: string;
+  value: string;
 }
 
 export interface IDetail {

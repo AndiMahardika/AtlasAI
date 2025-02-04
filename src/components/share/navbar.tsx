@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
           <Link to="/" className="text-gray-500 hover:text-gray-900">
             Home
           </Link>
-          <Link to="#" className="text-gray-500 hover:text-gray-900">
+          <Link to="/chatbot" className="text-gray-500 hover:text-gray-900">
             Chat-AI
           </Link>
         </nav>
@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
                 <Link to="/" className="text-sm font-medium text-gray-500 hover:text-gray-900">
                   Home
                 </Link>
-                <Link to="#" className="text-sm font-medium text-gray-500 hover:text-gray-900">
+                <Link to="/chatbot" className="text-sm font-medium text-gray-500 hover:text-gray-900">
                   Chat-AI
                 </Link>
               </div>

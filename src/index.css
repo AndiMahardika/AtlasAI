@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 /* ... */
-.animate-spin {
+/* .animate-spin {
   animation: spin 5s linear infinite;
-}
+} */
 
 /* * {
   border: 1px solid red;

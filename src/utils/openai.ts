@@ -6,7 +6,11 @@ const NVDIA_API_KEY = import.meta.env.VITE_NVDIA_API_KEY;
 const openai = new OpenAI({
   baseURL: NVDIA_BASE_URL,
   apiKey: NVDIA_API_KEY,
-  dangerouslyAllowBrowser: true 
+  dangerouslyAllowBrowser: true,
+  defaultHeaders: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${import.meta.env.VITE_NVDIA_API_KEY}`
+  }
 })
 
 export default openai

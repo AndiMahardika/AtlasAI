@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Session } from '@supabase/supabase-js';
 import { supabase } from '@/utils/supabase';
+import useUserStore from '@/store/useUserProfile';
+import { IProfile } from '@/types/types';
 
 export default function useAuth() {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const { setUserData } = useUserStore()
 
   const BASE_URL = import.meta.env.BASE_URL;
 
@@ -21,6 +24,9 @@ export default function useAuth() {
       setLoading(false);
     });
 
+    //Set user data
+    getUser()
+
     // Cleanup subscription on component unmount
     return () => {
       if (subscription) {
@@ -33,6 +39,11 @@ export default function useAuth() {
     await supabase.auth.signOut();
     setSession(null);
   };
+
+  async function getUser() {
+    const { data, error: _errorUserData } = await supabase.auth.getUser()
+    setUserData(data.user?.user_metadata as IProfile)
+  }
 
   const handleLoginWithGoogle = async () => {
     const {data: _user, error: _errorLogin} = await supabase.auth.signInWithOAuth({

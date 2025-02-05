@@ -34,3 +34,10 @@ export interface IDetail {
     name: string;
   }[];
 }
+
+export interface IProfile {
+  avatar_url: string;
+  email: string;
+  name: string;
+  phone: string;
+}

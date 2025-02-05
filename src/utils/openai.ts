@@ -1,6 +1,6 @@
 import OpenAI from "openai"
 
-const NVDIA_BASE_URL = `${window.location.origin}/api`;
+const NVDIA_BASE_URL = import.meta.env.VITE_BASE_URL_AI;
 const NVDIA_API_KEY = import.meta.env.VITE_NVDIA_API_KEY;
 
 const openai = new OpenAI({

@@ -22,11 +22,11 @@ export default function Profile() {
           <TableBody>
             <TableRow>
               <TableCell className="font-bold">Nama :</TableCell>
-              <TableCell>{userData?.name}</TableCell>
+              <TableCell>{userData?.name || "Not Available"}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="font-bold">Email :</TableCell>
-              <TableCell>{userData?.email}</TableCell>
+              <TableCell>{userData?.email || "Not Available"}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="font-bold">Phone :</TableCell>
@@ -37,14 +37,5 @@ export default function Profile() {
         </div>
       </div>
     </main>
-    // <div>
-    //   Profile {userData?.name}
-    //   <img 
-    //     src={userData?.avatar_url || "https://i.pinimg.com/736x/3c/ae/07/3cae079ca0b9e55ec6bfc1b358c9b1e2.jpg"} 
-    //     alt="" 
-    //     onError={(e) => (e.currentTarget.src = 'https://i.pinimg.com/736x/3c/ae/07/3cae079ca0b9e55ec6bfc1b358c9b1e2.jpg')} />  
-    //   Email : {userData?.email}
-    //   Phone : {userData?.phone || "Not Avaiable"}
-    // </div>
   )
 }

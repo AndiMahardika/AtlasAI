@@ -1,48 +1,26 @@
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import googleIcon from "@/assets/google.svg";
 import AuthLayout from "./auth.layout";
 import { Link } from "react-router-dom";
-import { Globe } from "lucide-react";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-const authSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-})
-
-type FormValues = z.infer<typeof authSchema>;
+import { Globe, Loader2 } from "lucide-react";
+import useSignup from "../hooks/useSignup";
 
 export default function Signup() {
-  const form = useForm<FormValues>({
-    resolver: zodResolver(authSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
+  const { form, onSubmit, loading } = useSignup()
 
   return (
     <AuthLayout>
       <section className="p-8 flex flex-col justify-center items-center relative">
         <div className="flex items-center gap-x-1 font-semibold text-slate-700 absolute left-7 top-6 text-sm md:hidden">
           <Globe size={18} />
-          <h3>Pomotimer</h3>
+          <h3>AtlasAI</h3>
         </div>
 
         <div className="max-w-md">
           <Form {...form}>
-            <form onSubmit={() => console.log("signup")} className="space-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <div>
                 <h3 className="text-2xl font-bold">Signup</h3>
                 <p className="text-slate-400 text-sm">
@@ -76,7 +54,12 @@ export default function Signup() {
                 )}
               />
               <Button className="bg-blue-500 hover:bg-blue-600 w-full" type="submit">
-                Signup
+                {loading ? (
+                  <>
+                    <Loader2 className="animate-spin" /> 
+                    Loading
+                  </>
+                ) : "Signup"}
               </Button>
 
               <div className="relative">

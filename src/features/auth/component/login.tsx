@@ -1,36 +1,14 @@
 import AuthLayout from "./auth.layout";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import googleIcon from "@/assets/google.svg";
 import { Link } from "react-router-dom";
-import { Globe } from "lucide-react";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-const authSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-})
-
-type FormValues = z.infer<typeof authSchema>;
+import { Globe, Loader2 } from "lucide-react";
+import useLogin from "../hooks/useLogin";
 
 export default function Login() {
-  const form = useForm<FormValues>({
-    resolver: zodResolver(authSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
+  const { form, onSubmit, loading } = useLogin()
 
   return (
     <AuthLayout>
@@ -42,7 +20,7 @@ export default function Login() {
 
         <div className="max-w-md">
           <Form {...form} >
-            <form onSubmit={() => console.log("login")} className="space-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <div>
                 <h3 className="text-2xl font-bold">Login</h3>
                 <p className="text-slate-400 text-sm">Enter your email and password to login your account</p>
@@ -72,7 +50,12 @@ export default function Login() {
                 )}
               />
               <Button className="bg-blue-500 hover:bg-blue-600 w-full" type="submit">
-                Login
+                {loading ? (
+                  <>
+                    <Loader2 className="animate-spin" /> 
+                    Loading
+                  </>
+                ) : "Login"}
               </Button>
 
               <div className="relative">

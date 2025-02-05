@@ -57,7 +57,9 @@ Akses aplikasi melalui **[http://localhost:5173](http://localhost:5173)**.
 - Menerjemahkan informasi negara.
 
 ✅ **Autentikasi OAuth:** Login dengan Google.
+
 ✅ **User Proofile** : Menampilkan Profile User
+
 ✅ **Desain Responsif**: Aplikasi dapat digunakan di berbagai ukuran layar.
 
 ---

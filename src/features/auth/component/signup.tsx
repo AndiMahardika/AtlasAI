@@ -6,9 +6,11 @@ import AuthLayout from "./auth.layout";
 import { Link } from "react-router-dom";
 import { Globe, Loader2 } from "lucide-react";
 import useSignup from "../hooks/useSignup";
+import useAuth from "@/hooks/useAuth";
 
 export default function Signup() {
   const { form, onSubmit, loading } = useSignup()
+  const { handleLoginWithGoogle } = useAuth()
 
   return (
     <AuthLayout>
@@ -75,7 +77,7 @@ export default function Signup() {
 
               
             </form>
-            <Button variant="outline" className="flex items-center justify-center w-full mt-4">
+            <Button variant="outline" className="flex items-center justify-center w-full mt-4" onClick={handleLoginWithGoogle}>
               <img src={googleIcon} alt="Google" className="w-6" />
               Google
             </Button>

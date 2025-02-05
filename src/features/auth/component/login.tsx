@@ -6,9 +6,11 @@ import googleIcon from "@/assets/google.svg";
 import { Link } from "react-router-dom";
 import { Globe, Loader2 } from "lucide-react";
 import useLogin from "../hooks/useLogin";
+import useAuth from "@/hooks/useAuth";
 
 export default function Login() {
   const { form, onSubmit, loading } = useLogin()
+  const { handleLoginWithGoogle } = useAuth()
 
   return (
     <AuthLayout>
@@ -69,7 +71,7 @@ export default function Login() {
                 </div>
               </div> 
             </form>
-            <Button variant="outline" type="submit" className="flex items-center justify-center w-full mt-4">
+            <Button variant="outline" type="submit" className="flex items-center justify-center w-full mt-4" onClick={handleLoginWithGoogle}>
               <img src={googleIcon} alt="Google" className="w-6" />
               Google
             </Button>

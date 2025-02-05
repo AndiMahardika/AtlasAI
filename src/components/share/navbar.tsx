@@ -2,7 +2,9 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetTrigger, SheetContent } from '@/components/ui/sheet';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useAuth from '@/hooks/useAuth';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 
 const Navbar: React.FC = () => {
   return (
@@ -30,11 +32,9 @@ const Navbar: React.FC = () => {
             <DropdownMenuContent className="w-[100px] p-2">
               <div className="relative flex-col flex items-center space-y-2">
                 <Link to="#" className="text-gray-500 hover:text-gray-900">
-                  profile
+                  Profile
                 </Link>
-                <Link to="#" className="text-gray-500 hover:text-gray-900">
-                  logout
-                </Link>
+                <Logout />
               </div>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -72,4 +72,35 @@ function MenuIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+function Logout(){
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  async function handleLogout(){
+    await logout()
+    navigate("/login")
+  }
+
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <p className='text-gray-500 hover:text-gray-900 cursor-pointer'>Logout</p>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you sure you want to logout?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action will end your current session and log you out of your account.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={handleLogout}>Logout</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}
+
 export default Navbar;
+

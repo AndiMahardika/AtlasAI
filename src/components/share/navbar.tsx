@@ -2,9 +2,14 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetTrigger, SheetContent } from '@/components/ui/sheet';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useAuth from '@/hooks/useAuth';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import useUserStore from '@/store/useUserProfile';
 
 const Navbar: React.FC = () => {
+  const { userData } = useUserStore()
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white">
       <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-6">
@@ -23,18 +28,20 @@ const Navbar: React.FC = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="rounded-full">
-                <img src='https://i.pinimg.com/736x/3c/ae/07/3cae079ca0b9e55ec6bfc1b358c9b1e2.jpg' className="h-8 w-8 rounded-full" alt='profile' />
+                <img 
+                  src= {userData?.avatar_url || 'https://i.pinimg.com/736x/3c/ae/07/3cae079ca0b9e55ec6bfc1b358c9b1e2.jpg'} 
+                  className="h-8 w-8 rounded-full" 
+                  alt='profile' 
+                  onError={(e) => (e.currentTarget.src = 'https://i.pinimg.com/736x/3c/ae/07/3cae079ca0b9e55ec6bfc1b358c9b1e2.jpg')} />
                 <span className="sr-only">Profile</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-[100px] p-2">
               <div className="relative flex-col flex items-center space-y-2">
-                <Link to="#" className="text-gray-500 hover:text-gray-900">
-                  profile
+                <Link to="/profile" className="text-gray-500 hover:text-gray-900">
+                  Profile
                 </Link>
-                <Link to="#" className="text-gray-500 hover:text-gray-900">
-                  logout
-                </Link>
+                <Logout />
               </div>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -72,4 +79,35 @@ function MenuIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+function Logout(){
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  async function handleLogout(){
+    await logout()
+    navigate("/login")
+  }
+
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <p className='text-gray-500 hover:text-gray-900 cursor-pointer'>Logout</p>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you sure you want to logout?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action will end your current session and log you out of your account.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={handleLogout}>Logout</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}
+
 export default Navbar;
+
